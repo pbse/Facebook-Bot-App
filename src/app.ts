@@ -1,35 +1,31 @@
 import express from "express";
 import bodyParser from "body-parser";
 import logger from "./util/logger";
-import path from "path";
 import expressValidator from "express-validator";
+import dotenv from 'dotenv';
 
 // Load environment variables from .env file, where API keys and passwords are configured
-dotenv.config({ path: ".env.example" });
+dotenv.config({ path: ".env" });
 
 // Controllers (route handlers)
-import * as apicontroller from "./controllers/apis";
-import * as homecontroller from "./controllers/home";
+import * as apiController from "./controllers/api";
+import * as homeController from "./controllers/home";
 
 // Create Express server
 const app = express();
 
 // Express configuration
 app.set("port", process.env.PORT || 3000);
-app.set("views", path.join(__dirname, "../views"));
-app.set("view engine", "pug");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 
-app.use((req, res, next) => {
+app.use((parameters: { req: any, res: any, next: any }) => {
+    const {req, res, next} = parameters;
     res.locals.user = req.user;
+    logger.info({"module": "App", "details": req.user});
     next();
 });
-
-app.use(
-    express.static(path.join(__dirname, "public"), { maxAge: 31557600000 })
-);
 
 /**
  * Primary app routes.
