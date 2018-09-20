@@ -8,8 +8,8 @@ import dotenv from 'dotenv';
 dotenv.config({ path: ".env" });
 
 // Controllers (route handlers)
-import * as apiController from "./controllers/api";
-import * as homeController from "./controllers/home";
+import apiController from "./controllers/api";
+import homeController from "./controllers/home";
 
 // Create Express server
 const app = express();
@@ -20,21 +20,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 
-app.use((parameters: { req: any, res: any, next: any }) => {
+app.use((parameters: { req: any, res: express.Response, next: express.NextFunction }) => {
     const {req, res, next} = parameters;
     res.locals.user = req.user;
-    logger.info({"module": "App", "details": req.user});
+    logger.info({"module": "App", "details": req});
     next();
 });
 
 /**
  * Primary app routes.
  */
-app.get("/", homeController.index);
+app.use("/", homeController);
 
 /**
  * API examples routes.
  */
-app.get("/api", apiController.getApi);
+app.use('/api', apiController);
 
 export default app;

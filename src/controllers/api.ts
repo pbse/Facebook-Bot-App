@@ -1,15 +1,13 @@
 "use strict";
 
 //import request from "request";
-import { Response, Request} from "express";
+import express from "express";
+const router = express.Router()
+import logger from "../util/logger";
 
+// define the home page route
+router.get('/', function (req, res) {
+    res.send('Birds home page')
+})
 
-/**
- * GET /api
- * List of API examples.
- */
-export let getApi = (_req: Request, res: Response) => {
-    res.render("api/index", {
-        title: "API Examples"
-    });
-};
+export default router;
