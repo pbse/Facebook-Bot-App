@@ -6,7 +6,7 @@
   "types": "./build/server.d.ts",
   "scripts": {
     "start": "npm run serve",
-    "build": "npm run build-ts && npm run tslint",
+    "build": "rm -rf ./build && npm run build-ts && cp .env ./build/",
     "serve": "node build/server.js",
     "watch-node": "nodemon build/server.js",
     "test": "jest --forceExit --coverage --verbose",
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "bootbot": "^1.0.16",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dotenv": "^6.0.0",
