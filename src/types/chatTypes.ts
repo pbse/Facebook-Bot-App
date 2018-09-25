@@ -54,4 +54,5 @@ export interface Chat {
     bot: Bot;
     userId: string;
     say: any;
+    sendButtonTemplate: any;
 }

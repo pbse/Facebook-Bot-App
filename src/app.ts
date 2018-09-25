@@ -17,8 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
 
 app.use((parameters: { req: any, res: express.Response, next: express.NextFunction }) => {
-    const {req, res, next} = parameters;
-    res.locals.user = req.user;
+    const {req, next} = parameters;
     logger.info({"module": "App", "details": req});
     next();
 });
