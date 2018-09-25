@@ -7,7 +7,8 @@ export const getListOfMovies = (genreName : string) => {
     return new Promise((resolve, reject) => {
         const api_key = process.env.TMDB_KEY;
         const genreObject = _.find(genres, (genreData) => { return genreData.name === genreName; });
-        const options = { method: 'GET',
+        const options = {
+            method: 'GET',
             url: 'https://api.themoviedb.org/3/discover/movie',
             qs: {
                 with_genres: genreObject.id.toString(),
@@ -18,14 +19,19 @@ export const getListOfMovies = (genreName : string) => {
                 sort_by: 'popularity.desc',
                 language: 'en-US',
                 api_key: api_key },
-            body: '{}' };
+            body: '{}'
+        };
         return request(options, (error, response, body) => {
-            if (error || body.error) {
-                logger.info({"module": "GetListOfMovies", "message": "Got Error", "details": error});
-                reject(new Error(error));
+            const code = response && response.statusCode;
+            if(code === 200) {
+                logger.info({"module": "GetListOfMovies", "message": "Got Data"});
+                resolve(JSON.parse(body || response.body));
             }
-            logger.info({"module": "GetListOfMovies", "message": "Got Data"});
-            resolve(JSON.parse(body || response.body));
+            else {
+                const err = error || (body && body.status_message);
+                logger.info({"module": "GetListOfMovies", "message": "Got Error", "details": error});
+                reject(new Error(err));
+            }
         });
     })
 };
