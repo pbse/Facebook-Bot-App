@@ -8,14 +8,10 @@
     "start": "npm run serve",
     "build": "rm -rf ./build && npm run build-ts && cp .env ./build/",
     "serve": "node build/server.js",
-    "watch-node": "nodemon build/server.js",
     "test": "jest --forceExit --coverage --verbose",
-    "watch-test": "npm run test -- --watchAll",
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
-    "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "debug": "npm run build && npm run watch-debug",
-    "serve-debug": "nodemon --inspect build/server.js"
+    "tslint": "tslint -c tslint.json -p tsconfig.json"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -45,7 +41,6 @@
     "chai": "^4.1.2",
     "express-validator": "^5.3.0",
     "jest": "^23.6.0",
-    "nodemon": "^1.18.3",
     "ts-node": "^7.0.1"
   },
   "engines": {
