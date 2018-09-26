@@ -6,7 +6,8 @@
   "types": "./build/server.d.ts",
   "scripts": {
     "start": "npm run serve",
-    "build": "rm -rf ./build && npm run build-ts && cp .env ./build/",
+    "build": "npm run rebuild",
+    "rebuild": "rm -rf ./build && npm run build-ts && cp .env ./build/",
     "serve": "node build/server.js",
     "test": "jest --forceExit --coverage --verbose",
     "build-ts": "tsc",
