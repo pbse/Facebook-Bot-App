@@ -4,7 +4,7 @@ import logger from "../util/logger";
 
 export const greetFunc = (bot : any) => {
 
-    bot.hear(['hello', 'hey', 'sup', /hey( there)?/i], (payload : Payload, chat : Chat)=>{
+    bot.hear(['hello', 'sup', /hey( there)?/i], (payload : Payload, chat : Chat)=>{
         logger.info({"module": "Api Controller", "message": payload.message.text, "details": chat});
         chat.say('Hello, human friend!').then(() => {
             chat.say('Please say genre to get the list of genres to search from', { typing: true });

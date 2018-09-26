@@ -24,9 +24,12 @@ export const helpFunc = (bot : any) => {
 
     bot.on('postback:HELP_COMMANDS', (payload : Payload, chat : Chat) => {
         logger.info({"module": "Api Controller", "message": "Help Commands Was Clicked", "details": payload});
-        chat.say('Here are the following commands for use.');
-        chat.say("'genre': to get a list of genre supported");
-        chat.say("'more genre': more supported genres");
-        chat.say("'config': lists your current bucket config");
+        chat.say('Here are the following commands for use.')
+            .then(() => {
+                chat.say("'genre': to get a list of genre supported");
+            })
+            .then(() => {
+                chat.say("'more genre': more supported genres");
+            });
     });
 };
