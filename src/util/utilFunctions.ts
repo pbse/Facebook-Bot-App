@@ -8,11 +8,10 @@ export const getListOfMovies = (genreName : string) => {
         const api_key = process.env.TMDB_KEY;
         const genreObject = _.find(genres, (genreData) => { return genreData.name === genreName; });
         const options = {
-            method: 'GET',
             url: 'https://api.themoviedb.org/3/discover/movie',
             qs: {
                 with_genres: genreObject.id.toString(),
-                primary_release_year: '2018',
+                primary_release_year: new Date().getFullYear(),
                 page: '1',
                 include_video: 'false',
                 include_adult: 'false',
@@ -21,7 +20,7 @@ export const getListOfMovies = (genreName : string) => {
                 api_key: api_key },
             body: '{}'
         };
-        return request(options, (error, response, body) => {
+        return request.get(options, (error, response, body) => {
             const code = response && response.statusCode;
             if(code === 200) {
                 logger.info({"module": "GetListOfMovies", "message": "Got Data"});

@@ -35,9 +35,15 @@ export const genreFunc = (bot : any) => {
                 response.results.forEach((result : any) => {
                     arr.push(result.original_title);
                 });
-                for(let i=0;i<10;i++) {
-                    chat.say(arr[i]);
-                }
+                chat.say(`Here are the Top 10 ${payload.message.text} Movies in the year ${new Date().getFullYear()}`)
+                    .then(() => {
+                        for(let i=0;i<10;i++) {
+                            chat.say(arr[i], { typing: true });
+                        }
+                    })
+                    .then(() => {
+                        chat.say('Please say genre or more genre to show more genre or help to show help', { typing: true });
+                    });
             });
     });
 };
