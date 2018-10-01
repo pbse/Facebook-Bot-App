@@ -1,7 +1,7 @@
 # Facebook Bot App
 ![Facebook Bot App](http://prashantb.me/content/images/2018/09/bot.gif)
 
-[View the blog article to learn how it's built]()
+[View the blog article to learn how it's built](http://prashantb.me/build-a-facebook-messenger-bot-app/)
 
 This Facebook Bot is an example to show how easy and quick it is to setup a bot for almost all cases.
 THis app gives top 10 Movie Suggestions based on the Genre Provided.
